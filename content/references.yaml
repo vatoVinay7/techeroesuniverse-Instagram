@@ -1,0 +1,10 @@
+# Feste Referenzbilder für ChatGPT-Story-Bilder (Reihenfolge beim Anhängen: tiny, techville, weitere Figuren).
+# Noch mit Vinay festzulegen – Kandidaten aus dem Drive-Ordner "Techeroes Universe nützliche Dateien und Videos …":
+#   Tiny:      "Profilbild Tiny" (Hauptordner)
+#   TechVille: evtl. "Tiny Dragon Poster for Youtube.png" (Unterordner "POSTED YOUTUBE Big Episode 1")
+#   Figuren:   Episoden-Poster (z. B. "zero quest EPISODE 1 POSTER.png") oder Figuren-Designs im
+#              Ordner https://drive.google.com/drive/folders/1Dtg1rGiKrxc5hNapI4PeVKepYmXkF0yJ
+confirmed: false
+tiny: null
+techville: null
+characters: {}   # z. B. mira: {file: "...", folder: "..."}

@@ -35,7 +35,13 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
    Bilder ansehen, Story-Typ zuordnen, über die Woche verteilen (12:00 täglich, 18:00
    Ankündigung an Reel-Tagen; „Guess the Tech“ und Auflösung an Folgetagen).
    Stories mit Umfrage/Quiz/Link-Sticker: `manual: true` + `note` (Vinay postet selbst).
-   Fehlen Stories → melden und ChatGPT-Prompts vorschlagen. Keine Bilder selbst generieren.
+   Fehlen Stories → melden und ChatGPT-Prompts schreiben. Keine Bilder selbst generieren.
+   **Story-Prompts (ChatGPT):** Englisch, 1080×1920, kurzer Text im Bild, oben 250 px und unten
+   300 px frei. Jeder Prompt beginnt mit der Liste der anzuhängenden Referenzbilder in fester
+   Reihenfolge – immer 1. Tiny, 2. TechVille-Umgebung, 3. jede weitere Figur der Szene – mit
+   Dateiname und Drive-Ordner, damit Figuren UND Umgebung gleich bleiben. Das Referenz-Set steht in
+   `content/references.yaml` (fehlt es noch: mit Vinay festlegen und dort eintragen).
+   Vorlage auch in Sqemes: „Tiny Dragon Story-Bild (ChatGPT-Prompt)“.
 4. Medien vorbereiten (lokal, mit ffmpeg):
    - Quellvideos kommen **direkt aus Google Drive** über „Google Drive für Desktop“ (Laufwerk,
      meist `G:\Meine Ablage\Techeroes Universe nützliche Dateien und Videos…`; der geteilte Ordner
