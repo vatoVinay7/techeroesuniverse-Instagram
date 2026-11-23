@@ -35,6 +35,9 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
    Bilder ansehen, Story-Typ zuordnen, über die Woche verteilen (12:00 täglich, 18:00
    Ankündigung an Reel-Tagen; „Guess the Tech“ und Auflösung an Folgetagen).
    Stories mit Umfrage/Quiz/Link-Sticker: `manual: true` + `note` (Vinay postet selbst).
+   **Highlights:** Jede Story bekommt im Plan als `note` ihr Ziel-Highlight aus
+   `content/highlights.yaml` (Vinay fügt sie in der App hinzu). Entsteht ein Highlight neu,
+   gleich den ChatGPT-Cover-Prompt mitliefern.
    Fehlen Stories → melden und ChatGPT-Prompts schreiben. Keine Bilder selbst generieren.
    **Story-Prompts (ChatGPT):** Englisch, 1080×1920, kurzer Text im Bild, oben 250 px und unten
    300 px frei. Jeder Prompt beginnt mit der Liste der anzuhängenden Referenzbilder in fester

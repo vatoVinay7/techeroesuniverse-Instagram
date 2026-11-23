@@ -1,0 +1,44 @@
+# Story-Highlights von @techeroesuniverse (Vinay, 23.11.2026).
+# Die Instagram-Schnittstelle kann keine Highlights anlegen: Vinay fügt Stories in der App hinzu.
+# Claude schreibt im Wochenplan zu jeder Story das Ziel-Highlight (note) und liefert für jedes
+# NEUE Highlight (erste Story) den ChatGPT-Cover-Prompt mit.
+# Reihenfolge = Reihenfolge im Profil. Titel max. 15 Zeichen.
+# Cover: 1080x1920, dunkelblauer runder Hintergrund, leuchtendes Cyan/Gold-Symbol in der Mitte, kein Text;
+#        Stil-Bild zuletzt anhängen: TEASER TEXT MUSTER.png
+highlights:
+  - key: start
+    title: "Start Here 🐉"
+    content: Vorstellung, Meet Tiny, worum es im Kanal geht
+    icon: Tinys Kopf
+    cover: null
+  - key: heroes
+    title: Heroes
+    content: Meet the Heroes (Mira, Matheo, JohnBot, T-Fox …)
+    icon: drei Figuren-Silhouetten
+    cover: null
+  - key: code-quest
+    title: Code Quest
+    content: Ankündigungen der Folgen (Next Quest), in Folgen-Reihenfolge
+    icon: "</> mit kleinem Drachenflügel"
+    cover: null          # Prompt am 23.11. geliefert
+    first_story: 2026-w48-mon-story
+  - key: explains
+    title: Explains
+    content: Ankündigungen der Erklärvideos
+    icon: Glühbirne
+    cover: null
+  - key: tech-facts
+    title: Tech Facts
+    content: Tiny's Tech Facts
+    icon: Blitz / Chip
+    cover: null
+  - key: guess
+    title: Guess the Tech
+    content: Rätsel, Auflösung jeweils direkt dahinter
+    icon: Fragezeichen
+    cover: null
+  - key: behind
+    title: Behind
+    content: Behind the scenes
+    icon: Filmklappe
+    cover: null
