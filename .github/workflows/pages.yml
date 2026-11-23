@@ -12,7 +12,7 @@ on:
     - cron: "40 2 * * *"
 
 permissions:
-  contents: read
+  contents: write   # alte media/<woche>-Branches löschen
   pages: write
   id-token: write
   issues: write
@@ -27,6 +27,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -34,6 +36,10 @@ jobs:
           cache: pip
 
       - run: pip install -r requirements.txt
+
+      - name: Alte Medien-Branches aufräumen
+        if: github.event_name == 'schedule'
+        run: python -m igpost prune-media
 
       - name: Medien der offenen Wochen laden
         env:

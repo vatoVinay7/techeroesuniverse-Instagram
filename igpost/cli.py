@@ -201,6 +201,13 @@ def cmd_build_site(args) -> int:
     return 0
 
 
+def cmd_prune_media(args) -> int:
+    from .site import prune_media
+    removed = prune_media(load_plans(), read_json(POSTED_PATH, {}), dry_run=args.dry_run)
+    log.info("Entfernte Medien-Branches: %s", removed or "keine")
+    return 0
+
+
 def cmd_whoami(args) -> int:
     config = load_config()
     client = InstagramClient(_token(refresh=False), config.graph_api_version)
@@ -232,6 +239,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("build-site", help="Pages-Seite mit Medien bauen")
     p.add_argument("out")
     p.set_defaults(fn=cmd_build_site)
+    p = sub.add_parser("prune-media", help="Medien-Branches erledigter Wochen löschen")
+    p.add_argument("--dry-run", action="store_true")
+    p.set_defaults(fn=cmd_prune_media)
     sub.add_parser("whoami", help="Token und Konto prüfen").set_defaults(fn=cmd_whoami)
     args = parser.parse_args(argv)
     try:

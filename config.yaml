@@ -9,8 +9,8 @@ graph_api_version: v25.0
 
 # Öffentliche Adresse, unter der GitHub Pages die Medien der aktuellen Woche bereitstellt.
 # Instagram lädt Videos und Bilder von dort.
-pages_base_url: https://vatovinay7.github.io/techeroesuniverse-instagram
-github_repo: vatoVinay7/techeroesuniverse-instagram
+pages_base_url: https://vatovinay7.github.io/techeroesuniverse-Instagram
+github_repo: vatoVinay7/techeroesuniverse-Instagram
 
 posting:
   reel_time: "18:00"
