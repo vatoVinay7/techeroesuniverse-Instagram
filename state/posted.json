@@ -10,5 +10,17 @@
     "planned_at": "2026-11-23T19:45:00+01:00",
     "status": "posted",
     "week": "2026-W48"
+  },
+  "2026-w48-mon-story": {
+    "container_id": "18127829986783748",
+    "done_at": "2026-11-23T19:01:23.900905+00:00",
+    "kind": "story",
+    "library_id": null,
+    "media": "2026-w48-mon-story.jpg",
+    "media_id": "18115485755234886",
+    "permalink": "https://www.instagram.com/stories/techeroesuniverse/4036937624665047244",
+    "planned_at": "2026-11-23T20:00:00+01:00",
+    "status": "posted",
+    "week": "2026-W48"
   }
 }
