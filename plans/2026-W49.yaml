@@ -1,6 +1,9 @@
 week: 2026-W49
 approved: false
 approved_at: null
+# Vinay hat Reels und Captions am 2026-11-23 inhaltlich mit „ok“ bestätigt.
+# Noch offen: Videos hochladen (media/2026-W49) und Story-Bilder. approved bleibt false bis dahin.
+content_ok_at: '2026-11-23T15:21:00+01:00'
 items:
 - id: 2026-w49-mon-reel
   kind: reel
