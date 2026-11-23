@@ -170,12 +170,14 @@ class InstagramClient:
 
     # ------------------------------------------------------------------ publishing
     def create_container(self, ig_id: str, *, kind: str, media_url: str, is_video: bool,
-                         caption: str | None = None) -> str:
+                         caption: str | None = None, cover_url: str | None = None) -> str:
         params: dict[str, Any] = {}
         if kind == "reel":
             if not is_video:
                 raise ValueError("Ein Reel braucht ein Video")
             params.update(media_type="REELS", video_url=media_url, share_to_feed="true")
+            if cover_url:
+                params["cover_url"] = cover_url
         elif kind == "story":
             params["media_type"] = "STORIES"
             params["video_url" if is_video else "image_url"] = media_url

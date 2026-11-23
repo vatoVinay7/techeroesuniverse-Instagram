@@ -10,7 +10,7 @@ Run by GitHub Actions every 15 minutes. Idempotent and crash-safe:
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Protocol
 
@@ -32,7 +32,7 @@ IMAGE_READY_TIMEOUT_S = 120
 
 class Client(Protocol):
     def create_container(self, ig_id: str, *, kind: str, media_url: str, is_video: bool,
-                         caption: str | None = None) -> str: ...
+                         caption: str | None = None, cover_url: str | None = None) -> str: ...
     def container_status(self, container_id: str) -> ContainerStatus: ...
     def wait_until_ready(self, container_id: str, *, timeout_s: int, interval_s: int = 20) -> ContainerStatus: ...
     def publish(self, ig_id: str, container_id: str) -> str: ...
@@ -201,9 +201,14 @@ class Publisher:
 
         if not container_id:
             self._media_check(url, item, self.config.max_media_bytes)
+            cover_url = None
+            if item.cover and item.kind == "reel":
+                cover_url = self.config.media_url(item.week, item.cover)
+                self._media_check(cover_url, replace(item, media=item.cover), self.config.max_media_bytes)
             caption = item.full_caption() if item.kind in CAPTION_KINDS else None
             container_id = client.create_container(ig_id, kind=item.kind, media_url=url,
-                                                   is_video=item.is_video, caption=caption)
+                                                   is_video=item.is_video, caption=caption,
+                                                   cover_url=cover_url)
             entry = self.pending.setdefault(item.id, {})
             entry.update(container_id=container_id, created_at=now.isoformat())
             self._save()

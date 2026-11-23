@@ -29,6 +29,7 @@ items:
   at: '2026-11-23T20:15:00+01:00'
   library_id: s1e1-index
   media: s1e1-index.mp4
+  cover: s1e1-index-cover.jpg   # Poster der Folge als Titelbild
   caption: |
     Tiny Dragon: Code Quest 🐉 | S1 E1 – Index
     Our quest begins! Tiny and Mira find out how computers keep track of where things are in a list.

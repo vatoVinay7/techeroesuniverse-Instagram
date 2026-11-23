@@ -36,6 +36,7 @@ class LibraryItem:
     season: int | None = None
     episode: int | None = None
     priority: int | None = None
+    poster_name: str | None = None    # Poster/Thumbnail im Drive-Ordner des Videos -> Reel-Titelbild
 
     @property
     def sort_key(self) -> tuple:
@@ -54,6 +55,7 @@ def load_library(path: Path = LIBRARY_PATH) -> list[LibraryItem]:
             caption=entry["caption"].strip(), hashtags=tuple(entry.get("hashtags", [])),
             drive_id=entry.get("drive_id"), source_name=entry.get("source_name"),
             season=entry.get("season"), episode=entry.get("episode"), priority=entry.get("priority"),
+            poster_name=entry.get("poster_name"),
         )
         if item.id in seen:
             raise ValueError(f"library.yaml: doppelte id {item.id}")
@@ -82,6 +84,7 @@ class PlanItem:
     library_id: str | None = None
     manual: bool = False              # story with sticker -> Vinay posts it himself
     note: str | None = None
+    cover: str | None = None          # Reel-Titelbild (Poster), .jpg im selben Medien-Branch
 
     @property
     def is_video(self) -> bool:
@@ -115,7 +118,7 @@ def load_plan(path: Path) -> Plan:
             id=str(entry["id"]), kind=str(entry["kind"]), at=at, media=str(entry["media"]), week=week,
             caption=str(entry.get("caption") or ""), hashtags=tuple(entry.get("hashtags") or ()),
             library_id=entry.get("library_id"), manual=bool(entry.get("manual", False)),
-            note=entry.get("note"),
+            note=entry.get("note"), cover=entry.get("cover"),
         ))
     return Plan(week=week, approved=bool(raw.get("approved", False)), items=items,
                 approved_at=raw.get("approved_at"), path=path)
@@ -196,6 +199,11 @@ def validate_plans(plans: list[Plan], library: list[LibraryItem], config: Config
                     errors.append(f"{pre}: Bild-Beitrag ohne Caption")
             if item.kind == "story" and item.caption.strip():
                 errors.append(f"{pre}: Stories haben keine Caption (Text gehört ins Bild)")
+            if item.cover is not None:
+                if item.kind != "reel":
+                    errors.append(f"{pre}: cover (Titelbild) gibt es nur für Reels")
+                elif not re.fullmatch(r"[A-Za-z0-9._-]+\.(jpg|jpeg)", item.cover):
+                    errors.append(f"{pre}: cover muss eine .jpg-Datei sein: {item.cover}")
             if item.manual and item.kind != "story":
                 errors.append(f"{pre}: manual gibt es nur für Stories")
             for problem in check_caption(item.caption, item.hashtags):

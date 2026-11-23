@@ -43,7 +43,10 @@ def weeks_needing_media(plans: list[Plan], posted: dict, now: datetime) -> dict[
         for item in plan.items:
             done = (posted.get(item.id) or {}).get("status") in DONE_STATES
             if not done or item.at >= keep_until:
-                needed.setdefault(plan.week, set()).add(item.media)
+                files = needed.setdefault(plan.week, set())
+                files.add(item.media)
+                if item.cover:
+                    files.add(item.cover)
     return needed
 
 

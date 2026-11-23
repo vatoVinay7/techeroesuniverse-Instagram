@@ -5,6 +5,7 @@
 # status: available = kann eingeplant werden
 #         hold      = zurückgestellt (z. B. saisonal); wird nicht automatisch eingeplant
 # drive_id: Datei-ID im Google-Drive-Ordner "Techeroes Universe nützliche Dateien …"
+# poster_name: Poster/Thumbnail im selben Drive-Ordner wie das Video -> wird Titelbild (cover) des Reels
 #
 # Ob ein Reel schon gepostet wurde, steht NICHT hier, sondern in state/posted.json.
 # Captions sind Entwürfe; sie werden im Wochenplan noch einmal geprüft und freigegeben.
@@ -19,6 +20,7 @@ items:
     characters: [Tiny, Mira]
     drive_id: 1PV1PQo995V6YtOsvy3sl1OBjx8cSetGO
     source_name: Index Mira Episode 1.mp4
+    poster_name: zero quest EPISODE 1 POSTER.png
     status: available
     caption: |
       Tiny Dragon: Code Quest 🐉 | S1 E1 – Index

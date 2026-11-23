@@ -109,10 +109,11 @@ class FakeClient:
         self.fail_create = fail_create
         self.created, self.published = [], []
 
-    def create_container(self, ig_id, *, kind, media_url, is_video, caption=None):
+    def create_container(self, ig_id, *, kind, media_url, is_video, caption=None, cover_url=None):
         if self.fail_create:
             raise self.fail_create
         self.created.append((kind, media_url, caption))
+        self.covers = getattr(self, "covers", []) + [cover_url]
         return f"c{len(self.created)}"
 
     def container_status(self, cid):
@@ -286,3 +287,47 @@ def test_validate_rejects_same_reel_twice():
     plans = [Plan(week="2026-W48", approved=True, items=[a]), Plan(week="2026-W49", approved=False, items=[b])]
     errors = validate_plans(plans, load_library(), CONFIG)
     assert any("schon in" in e for e in errors)
+
+
+# ---------------------------------------------------------------------------- reel covers (poster)
+def test_reel_cover_is_checked_and_sent(state):
+    client, checked = FakeClient(), []
+    pub = Publisher(CONFIG, lambda: (client, "ig1"), media_check=lambda url, item, mb: checked.append((url, item.is_video)),
+                    notifier=lambda t, b: None)
+    item = reel(datetime(2026, 11, 30, 18, 0, tzinfo=TZ), cover="s1e1-index-cover.jpg")
+    assert pub.run([item], datetime(2026, 11, 30, 17, 5, tzinfo=timezone.utc)).posted
+    assert client.covers[0].endswith("/media/2026-W49/s1e1-index-cover.jpg")
+    assert checked[1] == (client.covers[0], False)   # Titelbild als Bild geprüft
+
+
+def test_cover_validation_and_site_files():
+    from igpost.site import weeks_needing_media
+    at = datetime(2026, 11, 30, 18, 0, tzinfo=TZ)
+    ok = reel(at, cover="c.jpg")
+    bad_story = PlanItem(id="w49-s", kind="story", at=at, media="s.jpg", week="2026-W49", cover="c.jpg")
+    bad_ext = reel(at, id_="w49-x", cover="c.png")
+    bad_ext.library_id = None
+    errors = validate_plans([Plan(week="2026-W49", approved=False, items=[ok, bad_story, bad_ext])], load_library(), CONFIG)
+    assert sum("cover" in e for e in errors) == 2
+    needed = weeks_needing_media([Plan(week="2026-W49", approved=True, items=[ok])], {}, at)
+    assert needed == {"2026-W49": {"s1e1-index.mp4", "c.jpg"}}
+
+
+def test_instagram_client_reel_cover_param():
+    from igpost.instagram import InstagramClient
+
+    class S:
+        def request(self, method, url, params=None, data=None, headers=None, timeout=None):
+            self.data = data
+            class R:
+                ok = True
+                status_code = 200
+                headers = {}
+                def json(self_inner):
+                    return {"id": "c1"}
+            return R()
+
+    sess = S()
+    InstagramClient("IGt", "v25.0", session=sess).create_container(
+        "ig1", kind="reel", media_url="https://x/v.mp4", is_video=True, caption="c", cover_url="https://x/c.jpg")
+    assert sess.data["cover_url"] == "https://x/c.jpg" and sess.data["media_type"] == "REELS"

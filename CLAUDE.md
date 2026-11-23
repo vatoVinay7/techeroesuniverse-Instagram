@@ -54,6 +54,11 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
    - In einer Cloud-Sitzung ohne lokales Laufwerk kommen die Dateien über die Gerätebrücke.
    - Reels umwandeln:
      `python -m igpost prepare reel <quelle> build/<YYYY-Www>/<library_id>.mp4`
+   - **Jedes Reel bekommt sein Poster als Titelbild:** Poster liegt im selben Drive-Ordner wie das
+     Video (`poster_name` in der Bibliothek, sonst die PNG im Ordner).
+     `python -m igpost prepare story <poster> build/<YYYY-Www>/<library_id>-cover.jpg` und im Plan
+     `cover: <library_id>-cover.jpg` eintragen.
+   - Eingangsordner für Vinay: `inbox/<YYYY-Www>/` im Repo (in VS Code links; wird nie hochgeladen).
    - Stories: `python -m igpost prepare story <quelle> build/<YYYY-Www>/<item-id>.jpg`
    - Dateiname in `media` muss exakt dem Dateinamen im Medien-Branch entsprechen.
    - Bild-Beiträge im Feed (`kind: post`, z. B. Vorstellung zum Anpinnen):
