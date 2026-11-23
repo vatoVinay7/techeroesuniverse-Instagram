@@ -1,0 +1,75 @@
+week: 2026-W49
+approved: false
+approved_at: null
+items:
+- id: 2026-w49-mon-reel
+  kind: reel
+  at: '2026-11-30T18:00:00+01:00'
+  library_id: s1e1-index
+  media: s1e1-index.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E1 – Index
+    Our quest begins! Tiny and Mira find out how computers keep track of where things are in a list.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w49-tue-reel
+  kind: reel
+  at: '2026-12-01T18:00:00+01:00'
+  library_id: ex-computer-code
+  media: ex-computer-code.mp4
+  caption: |
+    How does a computer actually understand code? 🐉 | Techeroes Explains
+    Mira shows how the words we type turn into instructions a computer can follow.
+  hashtags:
+  - '#TecheroesExplains'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w49-wed-reel
+  kind: reel
+  at: '2026-12-02T18:00:00+01:00'
+  library_id: s1e2-loop
+  media: s1e2-loop.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E2 – Loops
+    Why do the same thing ten times when a loop can do it for you? Tiny and Matheo learn to repeat like a pro.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w49-thu-reel
+  kind: reel
+  at: '2026-12-03T18:00:00+01:00'
+  library_id: ex-how-ai-works
+  media: ex-how-ai-works.mp4
+  caption: |
+    How does AI actually work? 🐉 | Techeroes Explains
+    Everyone talks about AI – here is what really happens inside, explained so kids can follow along.
+  hashtags:
+  - '#TecheroesExplains'
+  - '#AIforKids'
+  - '#STEMforKids'
+  - '#KidsTech'
+  - '#LearnWithFun'
+- id: 2026-w49-fri-reel
+  kind: reel
+  at: '2026-12-04T18:00:00+01:00'
+  library_id: s1e3-if-else
+  media: s1e3-if-else.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E3 – If / Else
+    If this happens, do that – otherwise do something else. Tiny and Mira discover how computers make decisions.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
+
