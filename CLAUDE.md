@@ -37,9 +37,11 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
    Stories mit Umfrage/Quiz/Link-Sticker: `manual: true` + `note` (Vinay postet selbst).
    Fehlen Stories → melden und ChatGPT-Prompts vorschlagen. Keine Bilder selbst generieren.
 4. Medien vorbereiten (lokal, mit ffmpeg):
-   - Reels: Quellvideo besorgen. Die Drive-Dateien sind zu groß für den Drive-Connector –
-     sie kommen von Vinays Computer (Gerätebrücke, Ordner mit den heruntergeladenen Videos)
-     oder als Upload im Chat. Drive-ID und Originalname stehen in der Bibliothek. Dann
+   - Quellen liegen lokal im Ordner `inbox/` (von Git ignoriert): `inbox/videos/` = heruntergeladener
+     Drive-Ordner (Dateinamen siehe `source_name` in der Bibliothek, ggf. in Unterordnern suchen),
+     `inbox/stories/<YYYY-Www>/` = Story-Bilder der Woche. In einer Cloud-Sitzung ohne lokale
+     Dateien kommen sie über die Gerätebrücke oder als Upload im Chat.
+   - Reels umwandeln:
      `python -m igpost prepare reel <quelle> build/<YYYY-Www>/<library_id>.mp4`
    - Stories: `python -m igpost prepare story <quelle> build/<YYYY-Www>/<item-id>.jpg`
    - Dateiname in `media` muss exakt dem Dateinamen im Medien-Branch entsprechen.

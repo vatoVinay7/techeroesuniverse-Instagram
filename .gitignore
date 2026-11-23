@@ -5,3 +5,6 @@ build/
 _site/
 *.part
 .env
+
+# Eingangsordner für Quellvideos und Story-Bilder (bleibt nur lokal, wird nie hochgeladen)
+inbox/
