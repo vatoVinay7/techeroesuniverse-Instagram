@@ -2,6 +2,8 @@
 # Änderungen hier wirken beim nächsten Workflow-Lauf.
 
 account: techeroesuniverse
+# Instagram-Konto-ID (aus Meta for Developers); nötig für Tokens vom Typ "EAA…" (Unified Login)
+ig_user_id: "17841423512432167"
 timezone: Europe/Berlin
 
 # Instagram API with Instagram Login (graph.instagram.com)
