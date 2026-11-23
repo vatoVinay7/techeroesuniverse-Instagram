@@ -1,10 +1,39 @@
-# Feste Referenzbilder für ChatGPT-Story-Bilder (Reihenfolge beim Anhängen: tiny, techville, weitere Figuren).
-# Noch mit Vinay festzulegen – Kandidaten aus dem Drive-Ordner "Techeroes Universe nützliche Dateien und Videos …":
-#   Tiny:      "Profilbild Tiny" (Hauptordner)
-#   TechVille: evtl. "Tiny Dragon Poster for Youtube.png" (Unterordner "POSTED YOUTUBE Big Episode 1")
-#   Figuren:   Episoden-Poster (z. B. "zero quest EPISODE 1 POSTER.png") oder Figuren-Designs im
-#              Ordner https://drive.google.com/drive/folders/1Dtg1rGiKrxc5hNapI4PeVKepYmXkF0yJ
-confirmed: false
-tiny: null
-techville: null
-characters: {}   # z. B. mira: {file: "...", folder: "..."}
+# Feste Referenzbilder für ChatGPT-Bilder (Stories und Bild-Beiträge) von @techeroesuniverse.
+#
+# REIHENFOLGE beim Anhängen – immer so:
+#   1. tiny   2. techville   3. jede weitere Figur der Szene   4. (zuletzt) EIN Stil-Bild
+#
+# REGEL Stil-Bild (Vinay, 23.11.2026): Jeder Prompt hängt als letztes Bild eine Stil-Vorlage an –
+#   entweder das passende MUSTER aus "styles" (Schrift, Farben, Layout)
+#   oder eine frühere Story/ein früheres Bild als Vorlage ("previous"): dann im Prompt sagen,
+#   dass Layout, Schrift und Stil exakt übernommen und NUR die genannten Dinge geändert werden.
+#
+# Ordnerangaben relativ zu local_sources.videos (config.yaml).
+confirmed: partial          # tiny, techville, mira und styles am 23.11. benutzt; weitere Figuren noch festlegen
+tiny:
+  file: Profilbild Tiny
+  folder: .
+techville:
+  file: Tiny Dragon Poster for Youtube.png
+  folder: Techville fertige Episoden/Part 1 PROGRAMMING/POSTED YOUTUBE Big Episode 1 for Youtube
+characters:
+  mira:
+    file: zero quest EPISODE 1 POSTER.png
+    folder: Techville fertige Episoden/Part 1 PROGRAMMING/POSTED INSTA YOUTUBE Index Mira Episode 1
+  # matheo, johnbot, t-fox, … noch festlegen (Kandidaten: Episoden-Poster bzw. Figuren-Designs im
+  # Drive-Ordner https://drive.google.com/drive/folders/1Dtg1rGiKrxc5hNapI4PeVKepYmXkF0yJ)
+styles:
+  # Ankündigungen / Coming up / "Next Quest": Chrom-Gold-Schrift auf dunklem Schaltkreis
+  teaser:
+    file: TEASER TEXT MUSTER.png
+    folder: .
+  # Tiny Dragon: Code Quest – Titel, Vorstellung, Meet the Heroes: Bubble-Schrift blau→orange, Logo oben links
+  episode:
+    file: Techville UNIVER POSTER MUSTER with LOGO EASY BADGE TEXT NI CENTER WITH BLACK BACKGROUND.png
+    folder: .
+  # Techeroes Explains / Tech Facts / Guess the Tech
+  explains:
+    file: Techeroes explains MUSTER POSTER.png
+    folder: .
+# Frühere Bilder als Vorlage: fertige Stories liegen in local_sources.stories/<Woche>/
+previous: "Stories/<YYYY-Www>/<Datei> – im Prompt: 'Keep layout, font and style exactly like the last attached image; change only: …'"
