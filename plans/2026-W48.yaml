@@ -1,8 +1,8 @@
 # Start von @techeroesuniverse: Montag, 23.11.2026
 # Reihenfolge am Abend: Vorstellungs-Beitrag (zum Anpinnen) -> Story -> Folge 1
 week: 2026-W48
-approved: false
-approved_at: null
+approved: true
+approved_at: '2026-11-23T19:33:00+01:00'
 items:
 - id: 2026-w48-mon-intro
   kind: post
