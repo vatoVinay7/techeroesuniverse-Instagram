@@ -128,7 +128,11 @@ class InstagramClient:
         the token does not give access to @username.
         """
         if configured_id:
-            return configured_id, "config.yaml (ig_user_id)"
+            info = self._request("GET", configured_id, params={"fields": "id,username"})
+            name = info.get("username")
+            if name and name.lower() != username.lower():
+                raise InstagramError(f"ig_user_id {configured_id} gehört zu @{name}, nicht zu @{username}")
+            return configured_id, f"config.yaml (ig_user_id, bestätigt als @{name or '?'})"
         me = self.me()
         if self.host == GRAPH_HOST or me.get("username"):
             if me.get("username") and me["username"].lower() != username.lower():
