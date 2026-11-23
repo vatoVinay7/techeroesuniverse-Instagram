@@ -86,9 +86,30 @@ def cmd_refresh_token(args) -> int:
                    "Falls das so bleibt: in Meta for Developers neuen Token erzeugen und das Secret "
                    "IG_ACCESS_TOKEN ersetzen.")
             return 1
-    me = InstagramClient(record.token, load_config().graph_api_version).me()
-    log.info("Token ok für @%s, gültig bis %s", me.get("username"), record.expires_at or "unbekannt")
+    try:
+        me = InstagramClient(record.token, load_config().graph_api_version).me()
+    except InstagramError as exc:
+        hint = _token_hint(record.token)
+        notify("Instagram-Token wird abgelehnt",
+               f"Instagram meldet: `{exc}`\n\n{hint}")
+        log.error("Token abgelehnt: %s – %s", exc, hint)
+        return 1
+    log.info("Token ok für @%s (%s), gültig bis %s", me.get("username"), me.get("account_type"),
+             record.expires_at or "unbekannt")
     return 0
+
+
+def _token_hint(token: str) -> str:
+    """Explain likely causes without revealing the token."""
+    if token.startswith("EAA"):
+        return ("Das ist ein Facebook-Token (beginnt mit „EAA“). Gebraucht wird der Token aus "
+                "„API-Einrichtung mit Instagram-Login“ (beginnt mit „IG“).")
+    if not token.startswith("IG"):
+        return (f"Der Token beginnt mit „{token[:3]}…“ – Instagram-Login-Tokens beginnen mit „IG“. "
+                "Vermutlich wurde etwas anderes kopiert (z. B. App-ID oder App-Geheimcode).")
+    if len(token) < 100:
+        return f"Der Token ist nur {len(token)} Zeichen lang – wahrscheinlich unvollständig kopiert."
+    return "Token neu erzeugen und das Secret IG_ACCESS_TOKEN komplett ersetzen."
 
 
 def cmd_check(args) -> int:
