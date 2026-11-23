@@ -2,6 +2,7 @@ name: Posten
 
 # Alle 15 Minuten nachsehen, ob ein freigegebener Reel oder eine Story fällig ist.
 # GitHub startet geplante Läufe manchmal ein paar Minuten später – das ist eingeplant.
+# Läuft der Zeitplan nicht an: Actions → „Posten“ → „Run workflow“ (postet alles Fällige).
 on:
   schedule:
     - cron: "*/15 * * * *"
