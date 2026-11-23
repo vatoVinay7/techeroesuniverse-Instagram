@@ -1,0 +1,325 @@
+# Alle Reels für @techeroesuniverse.
+#
+# type:   episode  = Tiny Dragon: Code Quest (immer in Reihenfolge season/episode)
+#         explainer = Techeroes Explains (Reihenfolge = priority, kleiner = früher)
+# status: available = kann eingeplant werden
+#         hold      = zurückgestellt (z. B. saisonal); wird nicht automatisch eingeplant
+# drive_id: Datei-ID im Google-Drive-Ordner "Techeroes Universe nützliche Dateien …"
+#
+# Ob ein Reel schon gepostet wurde, steht NICHT hier, sondern in state/posted.json.
+# Captions sind Entwürfe; sie werden im Wochenplan noch einmal geprüft und freigegeben.
+
+items:
+  # ---------------------------------------------------------------- Season 1 – Programming
+  - id: s1e1-index
+    type: episode
+    season: 1
+    episode: 1
+    topic: Index
+    characters: [Tiny, Mira]
+    drive_id: 1PV1PQo995V6YtOsvy3sl1OBjx8cSetGO
+    source_name: Index Mira Episode 1.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S1 E1 – Index
+      Our quest begins! Tiny and Mira find out how computers keep track of where things are in a list.
+    hashtags: ["#TinyDragonCodeQuest", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  - id: s1e2-loop
+    type: episode
+    season: 1
+    episode: 2
+    topic: Loops
+    characters: [Tiny, Matheo]
+    drive_id: 1EJrFlvz9L7KkRzbePmUW6-f1aM6Q9eL1
+    source_name: Loop Matheo Episode 2.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S1 E2 – Loops
+      Why do the same thing ten times when a loop can do it for you? Tiny and Matheo learn to repeat like a pro.
+    hashtags: ["#TinyDragonCodeQuest", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  - id: s1e3-if-else
+    type: episode
+    season: 1
+    episode: 3
+    topic: If / Else
+    characters: [Tiny, Mira]
+    drive_id: 1nyVSNYw8j1ZNjRV_G77mP1pYqA6o0csr
+    source_name: If else Mira Episode 3.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S1 E3 – If / Else
+      If this happens, do that – otherwise do something else. Tiny and Mira discover how computers make decisions.
+    hashtags: ["#TinyDragonCodeQuest", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  - id: s1e4-variables
+    type: episode
+    season: 1
+    episode: 4
+    topic: Variables
+    characters: [Tiny, JohnBot]
+    drive_id: 1tsdDuHfTS-TODHVjK7RDFLKEAoFh7Bac
+    source_name: Variables JohnBot Episode 4.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S1 E4 – Variables
+      A box with a name that can hold anything – Tiny and JohnBot explore how programs remember things.
+    hashtags: ["#TinyDragonCodeQuest", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  - id: s1e5-algorithms
+    type: episode
+    season: 1
+    episode: 5
+    topic: Algorithms
+    characters: [Tiny, T-Fox]
+    drive_id: 15Qz7PLJUhuF7qIGg-kFP0tDUBS_ThM9T
+    source_name: Algorithms T-fox Episode 5.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S1 E5 – Algorithms
+      Step by step to the goal! Tiny and T-Fox learn that an algorithm is just a clear plan a computer can follow.
+    hashtags: ["#TinyDragonCodeQuest", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  # ---------------------------------------------------------------- Season 2 – Internet
+  - id: s2e1-client-server
+    type: episode
+    season: 2
+    episode: 1
+    topic: Client & Server
+    characters: [Tiny, Farah]
+    drive_id: 12hwaRXmM5SBsWVCI8GI0gonapXdxpoJ-
+    source_name: Part 2 Episode 1 Client and Server Farah.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S2 E1 – Client & Server
+      Season 2 takes Tiny into the internet! With Farah, Tiny finds out who asks and who answers when we open a website.
+    hashtags: ["#TinyDragonCodeQuest", "#InternetForKids", "#CodingForKids", "#STEMforKids", "#KidsTech"]
+
+  - id: s2e2-dns
+    type: episode
+    season: 2
+    episode: 2
+    topic: DNS
+    characters: [Tiny, Anna, Dara]
+    drive_id: 1YdlDxdnLe03TIo18i8MVkPtNdjTFeeeZ
+    source_name: Episode 2 DNS Anna Dara.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S2 E2 – DNS
+      How does your computer find a website just from its name? Tiny, Anna and Dara discover the internet's address book.
+    hashtags: ["#TinyDragonCodeQuest", "#InternetForKids", "#CodingForKids", "#STEMforKids", "#KidsTech"]
+
+  - id: s2e3-api
+    type: episode
+    season: 2
+    episode: 3
+    topic: API
+    characters: [Tiny, Maya, Lazzyy]
+    drive_id: 1xXepCzRUm4mSC6nHzZAUaSHtJbIhLwXA
+    source_name: API Episode 3 Maya and Lazzyy.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S2 E3 – API
+      Apps talk to each other all the time – but how? Tiny, Maya and Lazzyy find out what an API is.
+    hashtags: ["#TinyDragonCodeQuest", "#InternetForKids", "#CodingForKids", "#STEMforKids", "#KidsTech"]
+
+  - id: s2e4-database
+    type: episode
+    season: 2
+    episode: 4
+    topic: Database
+    characters: [Tiny, Jim, Divi]
+    drive_id: 1pbaXHyutw3NXD4WItbPP81VL01QI5GcO
+    source_name: Episode 4 DATABASE Tiny Jim Divi.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S2 E4 – Database
+      Where does the internet keep all its information? Tiny, Jim and Divi explore a database.
+    hashtags: ["#TinyDragonCodeQuest", "#InternetForKids", "#CodingForKids", "#STEMforKids", "#KidsTech"]
+
+  - id: s2e5-cache
+    type: episode
+    season: 2
+    episode: 5
+    topic: Cache
+    characters: [Tiny, JohnBot, Dex]
+    drive_id: 1LsEvuqyxKz41OY6VRVn4AdUxzF6lKWGU
+    source_name: Techville Part 2 Episode 5 CACHE Tiny JohnBot Dex.mp4
+    status: available
+    caption: |
+      Tiny Dragon: Code Quest 🐉 | S2 E5 – Cache
+      Why do websites load faster the second time? Tiny, JohnBot and Dex uncover the secret of the cache.
+    hashtags: ["#TinyDragonCodeQuest", "#InternetForKids", "#CodingForKids", "#STEMforKids", "#KidsTech"]
+
+  # ---------------------------------------------------------------- Techeroes Explains
+  - id: ex-computer-code
+    type: explainer
+    priority: 1
+    topic: How a computer understands code
+    characters: [Mira]
+    drive_id: 1XBgWwr0YZMzKA3PzFjY28AcZOi7CXvVs
+    source_name: How computer understands the code Mira.mp4
+    status: available
+    caption: |
+      How does a computer actually understand code? 🐉 | Techeroes Explains
+      Mira shows how the words we type turn into instructions a computer can follow.
+    hashtags: ["#TecheroesExplains", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  - id: ex-how-ai-works
+    type: explainer
+    priority: 2
+    topic: How AI works
+    characters: [Tiny]
+    drive_id: 1Gquc3BQ1NGPkmvXCV9y2YKsRFuF5MLT8
+    source_name: How_AI_Works_Techeroes_Kids_Dragon_Loop.mp4
+    status: available
+    caption: |
+      How does AI actually work? 🐉 | Techeroes Explains
+      Everyone talks about AI – here is what really happens inside, explained so kids can follow along.
+    hashtags: ["#TecheroesExplains", "#AIforKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-smartphone
+    type: explainer
+    priority: 3
+    topic: What's inside a smartphone
+    characters: [JohnBot]
+    drive_id: 1MgTEy2Hm6Y-X78nz2eLx5YcUhQnjKLbI
+    source_name: What inside Smartphone JohnBot.mp4
+    status: available
+    caption: |
+      How does a smartphone actually work? 🐉 | Techeroes Explains
+      JohnBot opens up a phone and shows the tiny parts that make it work.
+    hashtags: ["#TecheroesExplains", "#TechForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-cookies
+    type: explainer
+    priority: 4
+    topic: Browser cookies
+    characters: [Anna, Tiny]
+    drive_id: 1edGwaYqcKS-3eX37BYH0VN2DqrSiKdXW
+    source_name: Techeroes_What_Are_Browser_Cookies_Anna_Dragon_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How do browser cookies actually work? 🐉 | Techeroes Explains
+      Not the kind you eat! Anna and Tiny explain what websites remember about us.
+    hashtags: ["#TecheroesExplains", "#InternetForKids", "#OnlineSafety", "#STEMforKids", "#KidsTech"]
+
+  - id: ex-cloud
+    type: explainer
+    priority: 5
+    topic: The cloud
+    characters: []
+    drive_id: 1uF-bKPjYGIo_DNI-RwJsOFrZZRUXR4ZQ
+    source_name: Techeroes_What_Is_The_Cloud_Really_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How does the cloud actually work? 🐉 | Techeroes Explains
+      Your photos aren't floating in the sky – here is where "the cloud" really lives.
+    hashtags: ["#TecheroesExplains", "#InternetForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-face-recognition
+    type: explainer
+    priority: 6
+    topic: Face recognition on phones
+    characters: [T-Fox]
+    drive_id: 1TkTpuEO-KqxLJ_NaTjaEfGU7MCZvd6FM
+    source_name: Handys Gesicht Erkennung T-Fox.mp4
+    status: available
+    caption: |
+      How does face recognition actually work? 🐉 | Techeroes Explains
+      T-Fox shows how a phone can recognise your face in a split second.
+    hashtags: ["#TecheroesExplains", "#AIforKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-3d-animation
+    type: explainer
+    priority: 7
+    topic: 3D animation
+    characters: [Maya]
+    drive_id: 1b4Q6fX1-t-IUWZE896FhBtgPozF4KrME
+    source_name: How 3D Animation works Maya.mp4
+    status: available
+    caption: |
+      How does 3D animation actually work? 🐉 | Techeroes Explains
+      Maya takes a look behind the scenes of animated movies and games.
+    hashtags: ["#TecheroesExplains", "#TechForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-3d-printer
+    type: explainer
+    priority: 8
+    topic: 3D printer
+    characters: [Jim, Tiny]
+    drive_id: 15dt3_udW9ikii2kJNf4eZObdrYdKAHPq
+    source_name: Techeroes_How_Does_a_3D_Printer_Work_Jim_Dragon_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How does a 3D printer actually work? 🐉 | Techeroes Explains
+      Layer by layer to a real object – Jim and Tiny show how a 3D printer builds things.
+    hashtags: ["#TecheroesExplains", "#MakerKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-screen-colors
+    type: explainer
+    priority: 9
+    topic: How a screen creates colors
+    characters: []
+    drive_id: 1DwV1fKeyuKnFEnmNHdG4Idr69f0QHUhb
+    source_name: Techeroes_How_Screen_Creates_Colors_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How does a screen actually make colors? 🐉 | Techeroes Explains
+      Millions of tiny lights work together on every screen – here is how.
+    hashtags: ["#TecheroesExplains", "#TechForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-ram-vs-ssd
+    type: explainer
+    priority: 10
+    topic: RAM vs SSD
+    characters: []
+    drive_id: 1dgYEPzxpSARuWb9VDN-taflywsWdcYa0
+    source_name: Techeroes_RAM_vs_SSD_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How does computer memory actually work? 🐉 | Techeroes Explains
+      RAM or SSD – why does a computer need two kinds of memory?
+    hashtags: ["#TecheroesExplains", "#TechForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-internet-ocean
+    type: explainer
+    priority: 11
+    topic: Internet under the ocean
+    characters: []
+    drive_id: 1u3KsxLSeZQTGXE7l3pjowQkpA7ruCnqE
+    source_name: Techeroes_Internet_Under_The_Ocean_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How does the internet actually cross the ocean? 🐉 | Techeroes Explains
+      The internet isn't just in the air – most of it travels through cables at the bottom of the sea.
+    hashtags: ["#TecheroesExplains", "#InternetForKids", "#STEMforKids", "#KidsTech", "#LearnWithFun"]
+
+  - id: ex-programming-loops
+    type: explainer
+    priority: 12
+    topic: Programming loops
+    characters: []
+    drive_id: 19VNIOk6bR4ijFAiq1GAKnUSp5eDNzVFU
+    source_name: Techeroes_How_Programming_Loops_Work_FINAL_9x16.mp4
+    status: available
+    caption: |
+      How do loops in programming actually work? 🐉 | Techeroes Explains
+      Repeat, repeat, repeat – the trick that saves programmers a lot of work.
+    hashtags: ["#TecheroesExplains", "#CodingForKids", "#LearnToCode", "#STEMforKids", "#KidsTech"]
+
+  # ---------------------------------------------------------------- Zurückgestellt
+  - id: ex-ar-halloween
+    type: explainer
+    priority: 99
+    topic: AR (Halloween)
+    characters: [Matheo]
+    drive_id: 1xg8U8LT_Qt8-jUQhcl5PmJIBK-sQGNcY
+    source_name: AR Video Matheo.mp4
+    status: hold
+    note: Saisonal – erst wieder im Oktober einplanen.
+    caption: |
+      How does augmented reality actually work? 🐉 | Techeroes Explains
+      Matheo brings spooky Halloween creatures into the real world with AR.
+    hashtags: ["#TecheroesExplains", "#TechForKids", "#STEMforKids", "#KidsTech", "#Halloween"]

@@ -1,0 +1,36 @@
+# Zentrale Einstellungen für @techeroesuniverse.
+# Änderungen hier wirken beim nächsten Workflow-Lauf.
+
+account: techeroesuniverse
+timezone: Europe/Berlin
+
+# Instagram API with Instagram Login (graph.instagram.com)
+graph_api_version: v25.0
+
+# Öffentliche Adresse, unter der GitHub Pages die Medien der aktuellen Woche bereitstellt.
+# Instagram lädt Videos und Bilder von dort.
+pages_base_url: https://vatovinay7.github.io/techeroesuniverse-instagram
+github_repo: vatoVinay7/techeroesuniverse-instagram
+
+posting:
+  reel_time: "18:00"
+  story_content_time: "12:00"
+  story_announce_time: "18:00"
+  # Wie lange nach dem geplanten Zeitpunkt ein Post noch nachgeholt wird.
+  # Danach gilt er als verpasst und es kommt eine Meldung.
+  max_delay_minutes: 360
+
+  # Drosselung nach Vorrat (noch nicht gepostete, verfügbare Reels in der Bibliothek).
+  # Die erste passende Stufe (von oben) gilt.
+  rhythm:
+    - min_stock: 10
+      days: [mon, tue, wed, thu, fri]
+    - min_stock: 5
+      days: [mon, wed, fri]
+    - min_stock: 0
+      days: [tue, fri]
+
+limits:
+  # Instagram-Grenze: max. 100 API-Posts in 24 h – wir bleiben weit darunter.
+  max_posts_per_run: 6
+  max_media_bytes: 99000000   # GitHub Pages: Dateien unter 100 MB halten
