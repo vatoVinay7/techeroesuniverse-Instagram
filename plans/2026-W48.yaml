@@ -1,0 +1,40 @@
+# Start von @techeroesuniverse: Montag, 23.11.2026
+# Reihenfolge am Abend: Vorstellungs-Beitrag (zum Anpinnen) -> Story -> Folge 1
+week: 2026-W48
+approved: false
+approved_at: null
+items:
+- id: 2026-w48-mon-intro
+  kind: post
+  at: '2026-11-23T19:45:00+01:00'
+  media: 2026-w48-mon-intro.jpg
+  note: Vorstellungs-Beitrag – nach dem Posten in der App oben anpinnen (geht nicht über die Schnittstelle)
+  caption: |
+    Welcome to Techeroes Universe 🐉
+    Meet Tiny Dragon – a small dragon with a big curiosity for tech. Together with friends like Mira, Matheo and JohnBot, Tiny explores coding, AI and the internet in short, friendly episodes for curious kids.
+    New episodes and explainer videos every Monday to Friday. Our quest starts tonight with Episode 1.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#TecheroesExplains'
+  - '#CodingForKids'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w48-mon-story
+  kind: story
+  at: '2026-11-23T20:00:00+01:00'
+  media: 2026-w48-mon-story.jpg
+  note: Ankündigung – Episode 1 heute um 20:15
+- id: 2026-w48-mon-reel
+  kind: reel
+  at: '2026-11-23T20:15:00+01:00'
+  library_id: s1e1-index
+  media: s1e1-index.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E1 – Index
+    Our quest begins! Tiny and Mira find out how computers keep track of where things are in a list.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'

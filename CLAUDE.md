@@ -56,6 +56,9 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
      `python -m igpost prepare reel <quelle> build/<YYYY-Www>/<library_id>.mp4`
    - Stories: `python -m igpost prepare story <quelle> build/<YYYY-Www>/<item-id>.jpg`
    - Dateiname in `media` muss exakt dem Dateinamen im Medien-Branch entsprechen.
+   - Bild-Beiträge im Feed (`kind: post`, z. B. Vorstellung zum Anpinnen):
+     `python -m igpost prepare post <quelle> build/<YYYY-Www>/<item-id>.jpg` (1080×1350, 4:5).
+     Caption wie bei Reels; Anpinnen macht Vinay in der App.
 5. Plan (noch `approved: false`) committen und pushen – sonst räumt der nächtliche
    Aufräum-Lauf den Medien-Branch einer unbekannten Woche wieder ab.
 6. Wochenplan als Übersicht an Vinay schicken (Tag, Uhrzeit, Typ, Caption, Vorschau der Stories,

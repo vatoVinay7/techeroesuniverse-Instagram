@@ -219,3 +219,70 @@ def test_host_detection():
     from igpost.instagram import FACEBOOK_HOST, GRAPH_HOST, host_for_token
     assert host_for_token("IGAAxyz") == GRAPH_HOST
     assert host_for_token("EAAAxyz") == FACEBOOK_HOST
+
+
+# ---------------------------------------------------------------------------- feed image posts
+def test_feed_post_gets_caption_and_image(state):
+    client = FakeClient()
+    item = PlanItem(id="w48-mon-intro", kind="post", at=datetime(2026, 11, 23, 19, 45, tzinfo=TZ),
+                    media="intro.jpg", week="2026-W48", caption="Meet Tiny", hashtags=("#TinyDragonCodeQuest",))
+    result = make_publisher(client, []).run([item], datetime(2026, 11, 23, 18, 50, tzinfo=timezone.utc))
+    assert result.posted == ["w48-mon-intro"]
+    kind, url, caption = client.created[0]
+    assert kind == "post" and url.endswith("/media/2026-W48/intro.jpg")
+    assert caption == "Meet Tiny\n\n#TinyDragonCodeQuest"
+
+
+def test_story_never_sends_caption(state):
+    client = FakeClient()
+    item = PlanItem(id="w48-mon-story", kind="story", at=datetime(2026, 11, 23, 20, 0, tzinfo=TZ),
+                    media="s.jpg", week="2026-W48")
+    make_publisher(client, []).run([item], datetime(2026, 11, 23, 19, 5, tzinfo=timezone.utc))
+    assert client.created[0][2] is None
+
+
+def test_validate_post_rules():
+    at = datetime(2026, 11, 23, 19, 45, tzinfo=TZ)
+    bad = [
+        PlanItem(id="w48-video-post", kind="post", at=at, media="a.mp4", week="2026-W48", caption="x"),
+        PlanItem(id="w48-no-caption", kind="post", at=at, media="a.jpg", week="2026-W48"),
+        PlanItem(id="w48-story-caption", kind="story", at=at, media="b.jpg", week="2026-W48", caption="x"),
+        PlanItem(id="w48-manual-post", kind="post", at=at, media="c.jpg", week="2026-W48", caption="x", manual=True),
+    ]
+    errors = validate_plans([Plan(week="2026-W48", approved=False, items=bad)], load_library(), CONFIG)
+    text = "\n".join(errors)
+    assert ".jpg-Datei" in text and "ohne Caption" in text and "keine Caption" in text and "manual" in text
+    good = PlanItem(id="w48-intro", kind="post", at=at, media="c.jpg", week="2026-W48", caption="x")
+    assert validate_plans([Plan(week="2026-W48", approved=False, items=[good])], load_library(), CONFIG) == []
+
+
+def test_instagram_client_post_params():
+    from igpost.instagram import InstagramClient
+
+    class S:
+        def request(self, method, url, params=None, data=None, headers=None, timeout=None):
+            self.data = data
+            class R:
+                ok = True
+                status_code = 200
+                headers = {}
+                def json(self_inner):
+                    return {"id": "c9"}
+            return R()
+
+    sess = S()
+    client = InstagramClient("IGtoken", "v25.0", session=sess)
+    assert client.create_container("ig1", kind="post", media_url="https://x/a.jpg", is_video=False,
+                                   caption="Hi") == "c9"
+    assert sess.data == {"image_url": "https://x/a.jpg", "caption": "Hi"}
+    with pytest.raises(ValueError):
+        client.create_container("ig1", kind="post", media_url="https://x/a.mp4", is_video=True)
+
+
+def test_validate_rejects_same_reel_twice():
+    a = reel(datetime(2026, 11, 23, 20, 15, tzinfo=TZ), id_="w48-mon-reel")
+    a.week = "2026-W48"
+    b = reel(datetime(2026, 11, 30, 18, 0, tzinfo=TZ), id_="w49-mon-reel")
+    plans = [Plan(week="2026-W48", approved=True, items=[a]), Plan(week="2026-W49", approved=False, items=[b])]
+    errors = validate_plans(plans, load_library(), CONFIG)
+    assert any("schon in" in e for e in errors)

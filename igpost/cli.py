@@ -207,6 +207,8 @@ def cmd_prepare(args) -> int:
     if args.kind == "reel":
         info = media.prepare_reel(src, dst, max_bytes=config.max_media_bytes)
         print(f"{dst}: {info.width}x{info.height}, {info.duration:.1f} s, {info.size / 1e6:.1f} MB")
+    elif args.kind == "post":
+        print(f"Bild-Beitrag vorbereitet: {media.prepare_post(src, dst)} (1080x1350)")
     else:
         media.prepare_story(src, dst, max_bytes=config.max_media_bytes)
         print(f"Story vorbereitet: {dst.with_suffix('.jpg' if dst.suffix.lower() in {'.jpg', '.jpeg'} else '.mp4')}")
@@ -246,7 +248,7 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     parser = argparse.ArgumentParser(prog="igpost", description="Automatisches Posten für @techeroesuniverse")
     sub = parser.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("post", help="fällige Reels/Stories posten").set_defaults(fn=cmd_post)
+    sub.add_parser("post", help="fällige Reels/Stories/Bild-Beiträge posten").set_defaults(fn=cmd_post)
     p = sub.add_parser("refresh-token", help="Instagram-Token erneuern")
     p.add_argument("--force", action="store_true")
     p.set_defaults(fn=cmd_refresh_token)
@@ -256,7 +258,7 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(fn=cmd_suggest)
     sub.add_parser("status", help="Überblick").set_defaults(fn=cmd_status)
     p = sub.add_parser("prepare", help="Medium für Instagram umwandeln")
-    p.add_argument("kind", choices=["reel", "story"])
+    p.add_argument("kind", choices=["reel", "story", "post"])
     p.add_argument("src")
     p.add_argument("dst")
     p.set_defaults(fn=cmd_prepare)

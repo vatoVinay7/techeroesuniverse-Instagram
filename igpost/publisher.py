@@ -19,7 +19,7 @@ import requests
 from .config import PENDING_PATH, POSTED_PATH, Config
 from .instagram import ContainerStatus, InstagramError
 from .notify import notify
-from .plans import PlanItem
+from .plans import CAPTION_KINDS, PlanItem
 from .statefile import read_json, write_json
 
 log = logging.getLogger(__name__)
@@ -201,7 +201,7 @@ class Publisher:
 
         if not container_id:
             self._media_check(url, item, self.config.max_media_bytes)
-            caption = item.full_caption() if item.kind == "reel" else None
+            caption = item.full_caption() if item.kind in CAPTION_KINDS else None
             container_id = client.create_container(ig_id, kind=item.kind, media_url=url,
                                                    is_video=item.is_video, caption=caption)
             entry = self.pending.setdefault(item.id, {})

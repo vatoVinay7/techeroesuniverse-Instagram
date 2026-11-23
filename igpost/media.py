@@ -2,6 +2,7 @@
 
 Reels:   1080x1920, H.264 + AAC, 30 fps, faststart, < max_bytes (GitHub Pages limit)
 Stories: images -> 1080x1920 JPEG (blurred background if not 9:16)
+Posts:   images -> 1080x1350 JPEG (4:5 Feed-Format, blurred background if needed)
          videos -> like reels, max. 60 s
 """
 
@@ -98,10 +99,27 @@ def prepare_story(src: Path, dst: Path, *, max_bytes: int) -> Probe | None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if not is_image:
         return prepare_video(src, dst.with_suffix(".mp4"), max_bytes=max_bytes, max_seconds=STORY_MAX_SECONDS)
+    _image_to_jpeg(src, dst.with_suffix(".jpg"), W, H)
+    return None
+
+
+POST_W, POST_H = 1080, 1350
+
+
+def prepare_post(src: Path, dst: Path) -> Path:
+    """Feed-Bild: 1080x1350 JPEG (4:5). Andere Seitenverhältnisse bekommen einen unscharfen Rand."""
+    info = probe(src)
+    if info.duration > 0 and src.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".heic"}:
+        raise MediaError(f"{src.name}: ein Bild-Beitrag braucht ein Bild – Videos als Reel posten")
+    dst.parent.mkdir(parents=True, exist_ok=True)
     target = dst.with_suffix(".jpg")
-    graph = (f"[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=30:5[bg];"
-             f"[0:v]scale={W}:{H}:force_original_aspect_ratio=decrease[fg];"
+    _image_to_jpeg(src, target, POST_W, POST_H)
+    return target
+
+
+def _image_to_jpeg(src: Path, target: Path, w: int, h: int) -> None:
+    graph = (f"[0:v]scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},boxblur=30:5[bg];"
+             f"[0:v]scale={w}:{h}:force_original_aspect_ratio=decrease[fg];"
              f"[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuvj420p[out]")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-filter_complex", graph,
                     "-map", "[out]", "-frames:v", "1", "-q:v", "2", str(target)], check=True)
-    return None

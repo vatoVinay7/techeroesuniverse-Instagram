@@ -179,9 +179,14 @@ class InstagramClient:
         elif kind == "story":
             params["media_type"] = "STORIES"
             params["video_url" if is_video else "image_url"] = media_url
+        elif kind == "post":
+            # Einzelbild im Feed: ohne media_type, nur image_url (+ caption)
+            if is_video:
+                raise ValueError("Ein Bild-Beitrag braucht ein Bild – Videos als Reel posten")
+            params["image_url"] = media_url
         else:
             raise ValueError(f"Unbekannter Typ: {kind}")
-        if caption and kind == "reel":
+        if caption and kind in {"reel", "post"}:
             params["caption"] = caption
         data = self._request("POST", f"{ig_id}/media", data=params)
         container_id = data.get("id")

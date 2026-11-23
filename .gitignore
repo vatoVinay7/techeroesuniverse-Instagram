@@ -8,3 +8,4 @@ _site/
 
 # Eingangsordner für Quellvideos und Story-Bilder (bleibt nur lokal, wird nie hochgeladen)
 inbox/
+.venv/

@@ -16,6 +16,8 @@ WEEK_RE = re.compile(r"^(\d{4})-W(\d{2})$")
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,80}$")
 MEDIA_RE = re.compile(r"^[A-Za-z0-9._-]+\.(mp4|mov|jpg|jpeg)$")
 VIDEO_EXT = {".mp4", ".mov"}
+KINDS = {"reel", "story", "post"}
+CAPTION_KINDS = {"reel", "post"}   # Stories haben keine Caption
 MAX_CAPTION = 2200
 MAX_HASHTAGS = 5
 
@@ -71,7 +73,7 @@ def load_library(path: Path = LIBRARY_PATH) -> list[LibraryItem]:
 @dataclass
 class PlanItem:
     id: str
-    kind: str                         # reel | story
+    kind: str                         # reel | story | post (Bild im Feed)
     at: datetime                      # timezone-aware
     media: str
     week: str
@@ -149,6 +151,7 @@ def validate_plans(plans: list[Plan], library: list[LibraryItem], config: Config
     errors: list[str] = []
     lib_ids = {i.id for i in library}
     all_ids: dict[str, str] = {}
+    reel_uses: dict[str, str] = {}    # library_id -> erster Plan-Eintrag, der es postet
     for plan in plans:
         where = plan.path.name if plan.path else plan.week
         m = WEEK_RE.match(plan.week)
@@ -165,8 +168,8 @@ def validate_plans(plans: list[Plan], library: list[LibraryItem], config: Config
             if item.id in all_ids:
                 errors.append(f"{pre}: id auch in {all_ids[item.id]} vergeben")
             all_ids[item.id] = where
-            if item.kind not in {"reel", "story"}:
-                errors.append(f"{pre}: kind muss reel oder story sein")
+            if item.kind not in KINDS:
+                errors.append(f"{pre}: kind muss reel, story oder post sein")
             if item.at.tzinfo is None:
                 errors.append(f"{pre}: 'at' braucht eine Zeitzone, z. B. +01:00")
             elif not (monday <= item.at.astimezone(config.timezone).date() <= monday + timedelta(days=6)):
@@ -180,8 +183,21 @@ def validate_plans(plans: list[Plan], library: list[LibraryItem], config: Config
                     errors.append(f"{pre}: Reel ohne Caption")
                 if item.library_id and item.library_id not in lib_ids:
                     errors.append(f"{pre}: library_id {item.library_id} gibt es nicht")
-                if item.manual:
-                    errors.append(f"{pre}: manual gibt es nur für Stories")
+                if item.library_id:
+                    if item.library_id in reel_uses:
+                        errors.append(f"{pre}: {item.library_id} ist schon in {reel_uses[item.library_id]} "
+                                      "eingeplant – ein Reel nur einmal posten")
+                    else:
+                        reel_uses[item.library_id] = pre
+            if item.kind == "post":
+                if item.is_video:
+                    errors.append(f"{pre}: ein Bild-Beitrag braucht eine .jpg-Datei (Videos sind Reels)")
+                if not item.caption.strip():
+                    errors.append(f"{pre}: Bild-Beitrag ohne Caption")
+            if item.kind == "story" and item.caption.strip():
+                errors.append(f"{pre}: Stories haben keine Caption (Text gehört ins Bild)")
+            if item.manual and item.kind != "story":
+                errors.append(f"{pre}: manual gibt es nur für Stories")
             for problem in check_caption(item.caption, item.hashtags):
                 errors.append(f"{pre}: {problem}")
     return errors
