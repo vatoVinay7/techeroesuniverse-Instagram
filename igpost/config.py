@@ -40,6 +40,7 @@ class Config:
     rhythm: tuple[RhythmStep, ...]
     max_posts_per_run: int
     max_media_bytes: int
+    ig_user_id: str | None = None
     root: Path = field(default=ROOT)
 
     def media_url(self, week: str, filename: str) -> str:
@@ -74,4 +75,5 @@ def load_config(path: Path = CONFIG_PATH) -> Config:
         rhythm=rhythm,
         max_posts_per_run=int(limits.get("max_posts_per_run", 6)),
         max_media_bytes=int(limits.get("max_media_bytes", 99_000_000)),
+        ig_user_id=str(raw["ig_user_id"]) if raw.get("ig_user_id") else None,
     )

@@ -17,7 +17,13 @@ import requests
 
 log = logging.getLogger(__name__)
 
-GRAPH_HOST = "https://graph.instagram.com"
+GRAPH_HOST = "https://graph.instagram.com"      # Instagram-Login-Tokens ("IG…")
+FACEBOOK_HOST = "https://graph.facebook.com"    # Unified-/Facebook-Login-Tokens ("EAA…")
+
+
+def host_for_token(token: str) -> str:
+    """Meta issues two token families that only work on their own host."""
+    return FACEBOOK_HOST if token.startswith("EAA") else GRAPH_HOST
 
 # Error codes Meta documents as temporary (rate limiting / transient).
 TRANSIENT_CODES = {1, 2, 4, 17, 32, 341, 368, 613, 9004, 9007}
@@ -64,13 +70,14 @@ class InstagramClient:
             raise ValueError("access_token fehlt")
         self._token = access_token
         self._version = api_version
+        self.host = host_for_token(access_token)
         self._session = session or requests.Session()
         self._timeout = timeout
         self._max_retries = max_retries
 
     # ------------------------------------------------------------------ plumbing
     def _url(self, path: str) -> str:
-        return f"{GRAPH_HOST}/{self._version}/{path.lstrip('/')}"
+        return f"{self.host}/{self._version}/{path.lstrip('/')}"
 
     def _request(self, method: str, path: str, *, params: dict[str, Any] | None = None,
                  data: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -104,7 +111,52 @@ class InstagramClient:
 
     # ------------------------------------------------------------------ account
     def me(self) -> dict[str, Any]:
-        return self._request("GET", "me", params={"fields": "user_id,username,account_type"})
+        if self.host == GRAPH_HOST:
+            return self._request("GET", "me", params={"fields": "user_id,username,account_type"})
+        # Facebook-Host: Felder hängen davon ab, ob /me ein Instagram- oder Facebook-Nutzer ist
+        try:
+            return self._request("GET", "me", params={"fields": "id,username,user_id"})
+        except InstagramError as exc:
+            if exc.auth_problem:
+                raise
+            return self._request("GET", "me", params={"fields": "id,name"})
+
+    def resolve_account(self, username: str, configured_id: str | None = None) -> tuple[str, str]:
+        """Find the Instagram professional account ID to publish to.
+
+        Returns (ig_id, how_it_was_found). Raises InstagramError with an explanation if
+        the token does not give access to @username.
+        """
+        if configured_id:
+            return configured_id, "config.yaml (ig_user_id)"
+        me = self.me()
+        if self.host == GRAPH_HOST or me.get("username"):
+            if me.get("username") and me["username"].lower() != username.lower():
+                raise InstagramError(f"Token gehört zu @{me['username']}, nicht zu @{username}")
+            return str(me.get("user_id") or me["id"]), "/me"
+        # Facebook-Nutzer-Token: Instagram-Konten über verknüpfte Seiten bzw. Business-Zugriffe suchen
+        found: list[tuple[str, str]] = []
+        for path in ("me/accounts", "me/instagram_accounts"):
+            try:
+                data = self._request("GET", path, params={
+                    "fields": "instagram_business_account{id,username},id,username", "limit": 100})
+            except InstagramError as exc:
+                if exc.auth_problem:
+                    raise
+                log.info("%s nicht verfügbar: %s", path, exc)
+                continue
+            for entry in data.get("data", []):
+                acct = entry.get("instagram_business_account") or entry
+                if acct.get("id") and acct.get("username"):
+                    found.append((str(acct["id"]), acct["username"]))
+            for ig_id, name in found:
+                if name.lower() == username.lower():
+                    return ig_id, path
+        names = ", ".join(f"@{n}" for _, n in found) or "keine"
+        raise InstagramError(
+            f"Mit diesem Facebook-Token ist @{username} nicht erreichbar (gefunden: {names}; "
+            f"/me = {me.get('name') or me.get('id')}). Token über „Konto hinzufügen“ mit dem "
+            "Instagram-Konto erzeugen oder ig_user_id in config.yaml eintragen.")
 
     def publishing_quota(self, ig_id: str) -> dict[str, Any]:
         data = self._request("GET", f"{ig_id}/content_publishing_limit",
@@ -164,11 +216,28 @@ class InstagramClient:
 
 def refresh_long_lived_token(token: str, *, session: requests.Session | None = None,
                              timeout: float = 30.0) -> dict[str, Any]:
-    """Exchange a long-lived token (>= 24 h old) for a fresh one valid 60 days."""
+    """Exchange a long-lived token for a fresh one valid 60 days.
+
+    Instagram-Login tokens refresh themselves. Facebook-family tokens (EAA…) need the
+    app ID and app secret (secrets IG_APP_ID / IG_APP_SECRET); without them they
+    cannot be refreshed automatically.
+    """
+    import os
+
     sess = session or requests.Session()
-    resp = sess.get(f"{GRAPH_HOST}/refresh_access_token",
-                    params={"grant_type": "ig_refresh_token", "access_token": token},
-                    timeout=timeout)
+    if host_for_token(token) == GRAPH_HOST:
+        resp = sess.get(f"{GRAPH_HOST}/refresh_access_token",
+                        params={"grant_type": "ig_refresh_token", "access_token": token},
+                        timeout=timeout)
+    else:
+        app_id, secret = os.environ.get("IG_APP_ID"), os.environ.get("IG_APP_SECRET")
+        if not app_id or not secret:
+            raise InstagramError("Facebook-Token kann ohne IG_APP_ID/IG_APP_SECRET nicht automatisch "
+                                 "erneuert werden")
+        resp = sess.get(f"{FACEBOOK_HOST}/oauth/access_token",
+                        params={"grant_type": "fb_exchange_token", "client_id": app_id,
+                                "client_secret": secret, "fb_exchange_token": token},
+                        timeout=timeout)
     payload = _json_or_empty(resp)
     if not resp.ok or "error" in payload or "access_token" not in payload:
         raise _to_error(resp, payload)

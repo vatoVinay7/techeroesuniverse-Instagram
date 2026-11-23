@@ -51,9 +51,8 @@ def _token(refresh: bool) -> str:
 def _client_factory(config):
     def factory():
         client = InstagramClient(_token(refresh=True), config.graph_api_version)
-        me = client.me()
-        ig_id = str(me.get("user_id") or me.get("id"))
-        log.info("Angemeldet als @%s (%s)", me.get("username"), me.get("account_type"))
+        ig_id, how = client.resolve_account(config.account, config.ig_user_id)
+        log.info("Poste als @%s (Konto-ID %s, gefunden über %s, Host %s)", config.account, ig_id, how, client.host)
         return client, ig_id
     return factory
 
@@ -86,26 +85,30 @@ def cmd_refresh_token(args) -> int:
                    "Falls das so bleibt: in Meta for Developers neuen Token erzeugen und das Secret "
                    "IG_ACCESS_TOKEN ersetzen.")
             return 1
+    config = load_config()
     try:
-        me = InstagramClient(record.token, load_config().graph_api_version).me()
+        client = InstagramClient(record.token, config.graph_api_version)
+        me = client.me()
+        log.info("Token-Typ: %s | /me: %s", "Facebook/Unified (EAA)" if client.host.endswith("facebook.com")
+                 else "Instagram-Login (IG)", {k: v for k, v in me.items() if k in {"id", "user_id", "username", "name", "account_type"}})
+        ig_id, how = client.resolve_account(config.account, config.ig_user_id)
+        log.info("Instagram-Konto @%s gefunden: ID %s (über %s)", config.account, ig_id, how)
+        quota = client.publishing_quota(ig_id)
+        log.info("Posting-Kontingent: %s", quota)
     except InstagramError as exc:
         hint = _token_hint(record.token)
         notify("Instagram-Token wird abgelehnt",
                f"Instagram meldet: `{exc}`\n\n{hint}")
         log.error("Token abgelehnt: %s – %s", exc, hint)
         return 1
-    log.info("Token ok für @%s (%s), gültig bis %s", me.get("username"), me.get("account_type"),
-             record.expires_at or "unbekannt")
+    log.info("Alles bereit. Token gültig bis %s", record.expires_at or "unbekannt (wird beim nächsten Erneuern ermittelt)")
     return 0
 
 
 def _token_hint(token: str) -> str:
     """Explain likely causes without revealing the token."""
-    if token.startswith("EAA"):
-        return ("Das ist ein Facebook-Token (beginnt mit „EAA“). Gebraucht wird der Token aus "
-                "„API-Einrichtung mit Instagram-Login“ (beginnt mit „IG“).")
-    if not token.startswith("IG"):
-        return (f"Der Token beginnt mit „{token[:3]}…“ – Instagram-Login-Tokens beginnen mit „IG“. "
+    if not token.startswith(("IG", "EAA")):
+        return (f"Der Token beginnt mit „{token[:3]}…“ – gültige Tokens beginnen mit „IG“ oder „EAA“. "
                 "Vermutlich wurde etwas anderes kopiert (z. B. App-ID oder App-Geheimcode).")
     if len(token) < 100:
         return f"Der Token ist nur {len(token)} Zeichen lang – wahrscheinlich unvollständig kopiert."

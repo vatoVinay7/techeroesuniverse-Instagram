@@ -213,3 +213,9 @@ def test_auth_error_stops_run(state):
              reel(datetime(2026, 11, 30, 18, 0, tzinfo=TZ), id_="w49-mon-reel-2")]
     result = make_publisher(client, notes).run(items, datetime(2026, 11, 30, 17, 1, tzinfo=timezone.utc))
     assert len(result.errors) == 1 and "Instagram-Zugang ungültig" in notes
+
+
+def test_host_detection():
+    from igpost.instagram import FACEBOOK_HOST, GRAPH_HOST, host_for_token
+    assert host_for_token("IGAAxyz") == GRAPH_HOST
+    assert host_for_token("EAAAxyz") == FACEBOOK_HOST
