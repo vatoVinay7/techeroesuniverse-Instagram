@@ -14,6 +14,12 @@ graph_api_version: v25.0
 pages_base_url: https://vatovinay7.github.io/techeroesuniverse-Instagram
 github_repo: vatoVinay7/techeroesuniverse-Instagram
 
+# Lokale Quellen auf Vinays PC (Google Drive für Desktop). Nur für Claude Code in VS Code;
+# GitHub Actions braucht das nicht. Leer lassen = Claude Code sucht und fragt nach.
+local_sources:
+  videos: ""
+  stories: ""
+
 posting:
   reel_time: "18:00"
   story_content_time: "12:00"

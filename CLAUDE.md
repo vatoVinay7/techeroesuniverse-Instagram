@@ -37,10 +37,15 @@ Instagram lädt sie von dort), `refresh-token.yml` (wöchentlich), `ci.yml` (Tes
    Stories mit Umfrage/Quiz/Link-Sticker: `manual: true` + `note` (Vinay postet selbst).
    Fehlen Stories → melden und ChatGPT-Prompts vorschlagen. Keine Bilder selbst generieren.
 4. Medien vorbereiten (lokal, mit ffmpeg):
-   - Quellen liegen lokal im Ordner `inbox/` (von Git ignoriert): `inbox/videos/` = heruntergeladener
-     Drive-Ordner (Dateinamen siehe `source_name` in der Bibliothek, ggf. in Unterordnern suchen),
-     `inbox/stories/<YYYY-Www>/` = Story-Bilder der Woche. In einer Cloud-Sitzung ohne lokale
-     Dateien kommen sie über die Gerätebrücke oder als Upload im Chat.
+   - Quellvideos kommen **direkt aus Google Drive** über „Google Drive für Desktop“ (Laufwerk,
+     meist `G:\Meine Ablage\Techeroes Universe nützliche Dateien und Videos…`; der geteilte Ordner
+     ist als Verknüpfung in „Meine Ablage“ eingebunden). Pfad steht in `config.yaml` unter
+     `local_sources.videos` – ist er leer, das Laufwerk durchsuchen, Vinay den gefundenen Pfad
+     bestätigen lassen und eintragen. Dateien über `source_name` (bzw. Drive-ID) aus der Bibliothek
+     finden, ggf. in Unterordnern. Nicht herunterladen/kopieren lassen – direkt von dort umwandeln.
+   - Story-Bilder: Vinay legt sie in den Ordner aus `local_sources.stories` (Unterordner je Woche,
+     z. B. `…\Stories\2026-W49`) oder lädt sie im Chat hoch.
+   - In einer Cloud-Sitzung ohne lokales Laufwerk kommen die Dateien über die Gerätebrücke.
    - Reels umwandeln:
      `python -m igpost prepare reel <quelle> build/<YYYY-Www>/<library_id>.mp4`
    - Stories: `python -m igpost prepare story <quelle> build/<YYYY-Www>/<item-id>.jpg`
