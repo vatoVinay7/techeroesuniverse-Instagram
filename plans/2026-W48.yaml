@@ -2,7 +2,7 @@
 # Reihenfolge am Abend: Vorstellungs-Beitrag (zum Anpinnen) -> Story -> Folge 1
 week: 2026-W48
 approved: true
-approved_at: '2026-11-23T19:33:00+01:00'
+approved_at: '2026-11-24T20:45:00+01:00'   # 23.11. 19:33 (Mo), 24.11. 20:45 (Di-Reel)
 items:
 - id: 2026-w48-mon-intro
   kind: post
@@ -35,6 +35,21 @@ items:
     Our quest begins! Tiny and Mira find out how computers keep track of where things are in a list.
   hashtags:
   - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w48-tue-reel
+  kind: reel
+  at: '2026-11-24T21:30:00+01:00'
+  library_id: ex-computer-code
+  media: ex-computer-code.mp4
+  cover: ex-computer-code-cover.jpg   # Poster als Titelbild
+  caption: |
+    How does a computer actually understand code? 🐉 | Techeroes Explains
+    Mira shows how the words we type turn into instructions a computer can follow.
+  hashtags:
+  - '#TecheroesExplains'
   - '#CodingForKids'
   - '#LearnToCode'
   - '#STEMforKids'

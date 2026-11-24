@@ -1,28 +1,14 @@
-# Vorrat vor dieser Woche: 21 Reels -> Posting-Tage: mon, tue, wed, thu, fri
-# Letzter Reel-Typ davor: episode
+# Neu vorgeschlagen am 24.11.: S1E1 (23.11.) und ex-computer-code (24.11.) laufen schon in W48.
+# Reihenfolge noch mit Vinay abstimmen (W48 Mi–So fehlen ebenfalls noch).
+# Vorrat vor dieser Woche: 20 Reels -> Posting-Tage: mon, tue, wed, thu, fri
+# Letzter Reel-Typ davor: explainer
 week: 2026-W49
 approved: false
 approved_at: null
-# Neu vorgeschlagen am 23.11.: S1E1 läuft schon am 23.11. (W48), alles rückt eins weiter.
-# Das inhaltliche „ok“ vom 23.11. galt der alten Reihenfolge – neue Abfolge noch mit Vinay abstimmen.
 items:
 - id: 2026-w49-mon-reel
   kind: reel
   at: '2026-11-30T18:00:00+01:00'
-  library_id: ex-computer-code
-  media: ex-computer-code.mp4
-  caption: |
-    How does a computer actually understand code? 🐉 | Techeroes Explains
-    Mira shows how the words we type turn into instructions a computer can follow.
-  hashtags:
-  - '#TecheroesExplains'
-  - '#CodingForKids'
-  - '#LearnToCode'
-  - '#STEMforKids'
-  - '#KidsTech'
-- id: 2026-w49-tue-reel
-  kind: reel
-  at: '2026-12-01T18:00:00+01:00'
   library_id: s1e2-loop
   media: s1e2-loop.mp4
   caption: |
@@ -34,9 +20,9 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
-- id: 2026-w49-wed-reel
+- id: 2026-w49-tue-reel
   kind: reel
-  at: '2026-12-02T18:00:00+01:00'
+  at: '2026-12-01T18:00:00+01:00'
   library_id: ex-how-ai-works
   media: ex-how-ai-works.mp4
   caption: |
@@ -48,9 +34,9 @@ items:
   - '#STEMforKids'
   - '#KidsTech'
   - '#LearnWithFun'
-- id: 2026-w49-thu-reel
+- id: 2026-w49-wed-reel
   kind: reel
-  at: '2026-12-03T18:00:00+01:00'
+  at: '2026-12-02T18:00:00+01:00'
   library_id: s1e3-if-else
   media: s1e3-if-else.mp4
   caption: |
@@ -62,9 +48,9 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
-- id: 2026-w49-fri-reel
+- id: 2026-w49-thu-reel
   kind: reel
-  at: '2026-12-04T18:00:00+01:00'
+  at: '2026-12-03T18:00:00+01:00'
   library_id: ex-smartphone
   media: ex-smartphone.mp4
   caption: |
@@ -76,4 +62,18 @@ items:
   - '#STEMforKids'
   - '#KidsTech'
   - '#LearnWithFun'
+- id: 2026-w49-fri-reel
+  kind: reel
+  at: '2026-12-04T18:00:00+01:00'
+  library_id: s1e4-variables
+  media: s1e4-variables.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E4 – Variables
+    A box with a name that can hold anything – Tiny and JohnBot explore how programs remember things.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
+  - '#STEMforKids'
+  - '#KidsTech'
 
