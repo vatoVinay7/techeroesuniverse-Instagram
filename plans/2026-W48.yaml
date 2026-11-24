@@ -23,7 +23,7 @@ items:
   kind: story
   at: '2026-11-23T20:00:00+01:00'
   media: 2026-w48-mon-story.jpg
-  note: Ankündigung – Episode 1 heute um 20:15
+  note: Ankündigung – Episode 1 heute um 20:15 – Highlight „Code Quest“
 - id: 2026-w48-mon-reel
   kind: reel
   at: '2026-11-23T20:15:00+01:00'
@@ -39,6 +39,11 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
+- id: 2026-w48-tue-story
+  kind: story
+  at: '2026-11-24T21:15:00+01:00'
+  media: 2026-w48-tue-story.jpg
+  note: Ankündigung Explains „CODE“ – Highlight „Explains“ (neu)
 - id: 2026-w48-tue-reel
   kind: reel
   at: '2026-11-24T21:30:00+01:00'
