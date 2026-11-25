@@ -59,6 +59,18 @@
     "status": "posted",
     "week": "2026-W48"
   },
+  "2026-w48-wed-reel": {
+    "container_id": "18128440462783748",
+    "done_at": "2026-11-25T20:55:10.128529+00:00",
+    "kind": "reel",
+    "library_id": "s1e2-loop",
+    "media": "s1e2-loop.mp4",
+    "media_id": "18008566737007416",
+    "permalink": "https://www.instagram.com/reel/DgLcCach37-/",
+    "planned_at": "2026-11-25T21:50:00+01:00",
+    "status": "posted",
+    "week": "2026-W48"
+  },
   "2026-w48-wed-story": {
     "container_id": "18128437813783748",
     "done_at": "2026-11-25T20:44:40.361590+00:00",
