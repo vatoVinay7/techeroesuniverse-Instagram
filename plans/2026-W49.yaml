@@ -1,7 +1,7 @@
-# Neu vorgeschlagen am 25.11.: S1E1, ex-computer-code, S1E2 laufen schon in W48.
-# Reihenfolge noch mit Vinay abstimmen (W48 Do–So fehlen ebenfalls noch).
-# Vorrat vor dieser Woche: 19 Reels -> Posting-Tage: mon, tue, wed, thu, fri
-# Letzter Reel-Typ davor: episode
+# Neu vorgeschlagen am 26.11.: S1E1, ex-computer-code, S1E2, ex-how-ai-works laufen schon in W48.
+# Reihenfolge noch mit Vinay abstimmen (W48 Fr–So fehlen ebenfalls noch).
+# Vorrat vor dieser Woche: 18 Reels -> Posting-Tage: mon, tue, wed, thu, fri
+# Letzter Reel-Typ davor: explainer
 week: 2026-W49
 approved: false
 approved_at: null
@@ -9,20 +9,6 @@ items:
 - id: 2026-w49-mon-reel
   kind: reel
   at: '2026-11-30T18:00:00+01:00'
-  library_id: ex-how-ai-works
-  media: ex-how-ai-works.mp4
-  caption: |
-    How does AI actually work? 🐉 | Techeroes Explains
-    Everyone talks about AI – here is what really happens inside, explained so kids can follow along.
-  hashtags:
-  - '#TecheroesExplains'
-  - '#AIforKids'
-  - '#STEMforKids'
-  - '#KidsTech'
-  - '#LearnWithFun'
-- id: 2026-w49-tue-reel
-  kind: reel
-  at: '2026-12-01T18:00:00+01:00'
   library_id: s1e3-if-else
   media: s1e3-if-else.mp4
   caption: |
@@ -34,9 +20,9 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
-- id: 2026-w49-wed-reel
+- id: 2026-w49-tue-reel
   kind: reel
-  at: '2026-12-02T18:00:00+01:00'
+  at: '2026-12-01T18:00:00+01:00'
   library_id: ex-smartphone
   media: ex-smartphone.mp4
   caption: |
@@ -48,9 +34,9 @@ items:
   - '#STEMforKids'
   - '#KidsTech'
   - '#LearnWithFun'
-- id: 2026-w49-thu-reel
+- id: 2026-w49-wed-reel
   kind: reel
-  at: '2026-12-03T18:00:00+01:00'
+  at: '2026-12-02T18:00:00+01:00'
   library_id: s1e4-variables
   media: s1e4-variables.mp4
   caption: |
@@ -62,9 +48,9 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
-- id: 2026-w49-fri-reel
+- id: 2026-w49-thu-reel
   kind: reel
-  at: '2026-12-04T18:00:00+01:00'
+  at: '2026-12-03T18:00:00+01:00'
   library_id: ex-cookies
   media: ex-cookies.mp4
   caption: |
@@ -74,6 +60,20 @@ items:
   - '#TecheroesExplains'
   - '#InternetForKids'
   - '#OnlineSafety'
+  - '#STEMforKids'
+  - '#KidsTech'
+- id: 2026-w49-fri-reel
+  kind: reel
+  at: '2026-12-04T18:00:00+01:00'
+  library_id: s1e5-algorithms
+  media: s1e5-algorithms.mp4
+  caption: |
+    Tiny Dragon: Code Quest 🐉 | S1 E5 – Algorithms
+    Step by step to the goal! Tiny and T-Fox learn that an algorithm is just a clear plan a computer can follow.
+  hashtags:
+  - '#TinyDragonCodeQuest'
+  - '#CodingForKids'
+  - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
 
