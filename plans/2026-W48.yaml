@@ -79,6 +79,11 @@ items:
   - '#LearnToCode'
   - '#STEMforKids'
   - '#KidsTech'
+- id: 2026-w48-thu-story
+  kind: story
+  at: '2026-11-26T20:21:00+01:00'
+  media: 2026-w48-thu-story.jpg
+  note: Ankündigung „TECHEROES EXPLAINS · AI“ – Highlight „Explains“
 - id: 2026-w48-thu-reel
   kind: reel
   at: '2026-11-26T20:30:00+01:00'
